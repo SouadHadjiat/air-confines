@@ -1,0 +1,15 @@
+
+.question {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .form-container {
+    padding-top: 20px;
+  }
+
+  button.submit-answer {
+    margin-left: 15px;
+  }
+}

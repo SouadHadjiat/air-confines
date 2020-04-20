@@ -1,0 +1,21 @@
+<div class="main-container">
+  <h3>Dans quelle a été prise cette photo ?</h3>
+
+  <div class="game-level" *ngIf="currentLevel">
+    <h2>Niveau {{currentLevel.level}} - Score {{score}}</h2>
+    <div class="question" *ngIf="currentQuestion">
+      <img height="450" src="./assets/photos/level_{{currentLevel.level}}/{{currentQuestion.photoFileName}}">
+      <div class="form-container">
+        <mat-form-field>
+          <input matInput placeholder="Answer..." [(ngModel)]='answerModel' autofocus>
+        </mat-form-field>
+        <button mat-flat-button color="primary" class="submit-answer" (click)="onSubmitAnswer()">
+          Valider
+        </button>
+      </div>
+    </div>
+    <button mat-flat-button color="accent" class="submit-answer" (click)="onNextQuestion()">
+      Suivant
+    </button>
+  </div>
+</div>

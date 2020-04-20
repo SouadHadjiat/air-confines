@@ -1,0 +1,27 @@
+{
+  "levels": [
+    {
+      "level": 1,
+      "questions": [
+        {
+          "cityName": "paris",
+          "countryName": "france",
+          "description": "La tour eiffel, symbole de la ville de Paris",
+          "photoFileName": "1-a.jpg"
+        },
+        {
+          "cityName": "madrid",
+          "countryName": "espagne",
+          "description": "",
+          "photoFileName": "1-b.jpg"
+        },
+        {
+          "cityName": "geneve",
+          "countryName": "suisse",
+          "description": "",
+          "photoFileName": "1-c.jpg"
+        }
+      ]
+    }
+  ]
+}
