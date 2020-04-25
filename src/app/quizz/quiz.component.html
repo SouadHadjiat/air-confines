@@ -1,5 +1,8 @@
 <div class="main-container">
-  <h3>Dans quelle ville a été prise cette photo ?</h3>
+  <h3>
+    <span *ngIf="!gameOver">Dans quelle ville a été prise cette photo ?</span>
+    <span *ngIf="gameOver">Jeu terminé !</span>
+  </h3>
 
   <div class="game-level" *ngIf="currentLevel">
     <div class="info-tooltip"
@@ -8,10 +11,12 @@
     </div>
 
     <h2>
-      <span *ngIf="!gameOver">Niveau {{currentLevel.level}}</span>
-      <span *ngIf="gameOver">Jeu terminé</span>
-      -
-      <span>Score {{score}}</span>
+      <span *ngIf="!gameOver">
+        Niveau {{currentLevel.level}} - Score
+      </span>
+      <span *ngIf="gameOver">Score final</span>
+      {{score}}
+      <span> - Chrono {{timerValueSeconds}}</span>
     </h2>
 
     <div class="question" *ngIf="currentQuestion && !gameOver">
@@ -38,8 +43,12 @@
       </div>
     </div>
 
-    <div *ngIf="gameOver">
+    <div *ngIf="gameOver" class="game-over-container">
       <img class="photo" alt="Celebration (credits: Unsplash)" src="./assets/images/tada.jpg">
+
+      <div>
+        <button mat-flat-button color="accent">Rejouer</button>
+      </div>
     </div>
 
   </div>

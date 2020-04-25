@@ -17,10 +17,14 @@ export class QuizComponent {
   currentQuestion: CityQuiz;
   currentQuestionIndex: number = 0;
   score: number = 0;
+  locale: string = 'fr'; // for now only french supported
 
   answerModel: string; // TODO set a real city search input
   answerStatus: string = 'NA'; //'NA', 'CORRECT', 'WRONG'
   gameOver: boolean = false;
+
+  timer: any;
+  timerValueSeconds: number = 0;
 
   constructor(public gameService: GameService) {
     this.game = this.gameService.loadGame();
@@ -29,6 +33,7 @@ export class QuizComponent {
       const firstLevel = this.game.levels[0];
       this.setCurrentLevel(firstLevel)
     }
+    this.startTimer();
   }
 
   onNextQuestion() {
@@ -57,7 +62,7 @@ export class QuizComponent {
       const nextLevel = this.game.levels[currentLevel];
       this.setCurrentLevel(nextLevel)
     } else {
-      this.gameOver = true;
+      this.endGame();
     }
   }
 
@@ -65,7 +70,7 @@ export class QuizComponent {
     if (!this.answerModel || this.answerStatus == 'CORRECT') {
       return;
     }
-    if (this.currentQuestion.checkIsCorrectAnswer(this.answerModel)) {
+    if (this.currentQuestion.checkIsCorrectAnswer(this.answerModel, this.locale)) {
       this.score++;
       this.currentLevelRightAnswersCount++;
       this.setCorrectAnswerStatus();
@@ -83,6 +88,11 @@ export class QuizComponent {
     } else {
       this.onSubmitAnswer()
     }
+  }
+
+  private endGame() {
+    this.gameOver = true;
+    this.stopTimer();
   }
 
   private setCurrentLevel(level: GameLevel) {
@@ -103,6 +113,14 @@ export class QuizComponent {
   private resetAnswer() {
     this.answerStatus = 'NA';
     this.answerModel = '';
+  }
+
+  private startTimer() {
+    this.timer = setInterval(() => {this.timerValueSeconds++}, 1000)
+  }
+
+  private stopTimer() {
+    clearInterval(this.timer)
   }
 
 }

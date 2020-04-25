@@ -12,7 +12,7 @@ export class CityQuiz {
     this.photoFileName = data.photoFileName;
   }
 
-  checkIsCorrectAnswer(answer: string): boolean {
-    return answer && this.cityName.toLowerCase() == answer.toLowerCase()
+  checkIsCorrectAnswer(answer: string, locale: string): boolean {
+    return answer && this.cityName.localeCompare(answer, locale, {sensitivity: "base"}) == 0
   }
 }
