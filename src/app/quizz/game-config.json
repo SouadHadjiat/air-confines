@@ -6,7 +6,7 @@
         {
           "cityName": "paris",
           "countryName": "france",
-          "description": "La tour eiffel, symbole de la ville de Paris",
+          "description": "La tour eiffel",
           "photoFileName": "1-a.jpg"
         },
         {
@@ -20,6 +20,42 @@
           "countryName": "suisse",
           "description": "",
           "photoFileName": "1-c.jpg"
+        },
+        {
+          "cityName": "amsterdam",
+          "countryName": "hollande",
+          "description": "",
+          "photoFileName": "1-d.jpg"
+        },
+        {
+          "cityName": "rome",
+          "countryName": "italie",
+          "description": "Le colisée",
+          "photoFileName": "1-e.jpg"
+        },
+        {
+          "cityName": "pise",
+          "countryName": "italie",
+          "description": "La tour de pise",
+          "photoFileName": "1-f.jpg"
+        },
+        {
+          "cityName": "venise",
+          "countryName": "italie",
+          "description": "",
+          "photoFileName": "1-g.jpg"
+        },
+        {
+          "cityName": "paris",
+          "countryName": "france",
+          "description": "Le musée du louvre",
+          "photoFileName": "1-h.jpg"
+        },
+        {
+          "cityName": "barcelone",
+          "countryName": "espagne",
+          "description": "La sagrada familia",
+          "photoFileName": "1-i.jpg"
         }
       ]
     }

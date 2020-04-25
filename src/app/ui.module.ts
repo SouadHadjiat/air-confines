@@ -2,8 +2,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -15,8 +17,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     // material
     MatButtonModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTooltipModule
   ],
   declarations: [],
   exports: [
@@ -26,8 +30,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     // material
     MatButtonModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTooltipModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

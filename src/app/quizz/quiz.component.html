@@ -1,21 +1,46 @@
 <div class="main-container">
-  <h3>Dans quelle a été prise cette photo ?</h3>
+  <h3>Dans quelle ville a été prise cette photo ?</h3>
 
   <div class="game-level" *ngIf="currentLevel">
-    <h2>Niveau {{currentLevel.level}} - Score {{score}}</h2>
-    <div class="question" *ngIf="currentQuestion">
-      <img height="450" src="./assets/photos/level_{{currentLevel.level}}/{{currentQuestion.photoFileName}}">
+    <div class="info-tooltip"
+         matTooltip="Le score à atteindre pour passer au niveau suivant est de {{currentLevelScoreGoal}}">
+      <mat-icon aria-hidden="false" aria-label="info">info</mat-icon>
+    </div>
+
+    <h2>
+      <span *ngIf="!gameOver">Niveau {{currentLevel.level}}</span>
+      <span *ngIf="gameOver">Jeu terminé</span>
+      -
+      <span>Score {{score}}</span>
+    </h2>
+
+    <div class="question" *ngIf="currentQuestion && !gameOver">
+      <img class="photo" src="./assets/photos/level_{{currentLevel.level}}/{{currentQuestion.photoFileName}}">
       <div class="form-container">
         <mat-form-field>
-          <input matInput placeholder="Answer..." [(ngModel)]='answerModel' autofocus>
+          <input matInput placeholder="Réponse..." [(ngModel)]='answerModel' autofocus (keydown.enter)="onKeyEnter()">
         </mat-form-field>
-        <button mat-flat-button color="primary" class="submit-answer" (click)="onSubmitAnswer()">
+        <!-- answer status -->
+        <div class="answer-status {{answerStatus}}">
+          <mat-icon *ngIf="answerStatus == 'CORRECT'" aria-hidden="false" aria-label="right">check_circle</mat-icon>
+          <mat-icon *ngIf="answerStatus == 'WRONG'" aria-hidden="false" aria-label="wrong">cancel</mat-icon>
+        </div>
+        <!-- submit buttons -->
+        <button [disabled]="answerStatus === 'CORRECT'" mat-flat-button color="primary" class="submit-answer"
+                (click)="onSubmitAnswer()">
           Valider
+        </button>
+
+        <button [disabled]="answerStatus === 'NA'" mat-flat-button color="accent" class="submit-answer"
+                (click)="onNextQuestion()">
+          Suivant
         </button>
       </div>
     </div>
-    <button mat-flat-button color="accent" class="submit-answer" (click)="onNextQuestion()">
-      Suivant
-    </button>
+
+    <div *ngIf="gameOver">
+      <img class="photo" alt="Celebration (credits: Unsplash)" src="./assets/images/tada.jpg">
+    </div>
+
   </div>
 </div>

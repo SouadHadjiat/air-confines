@@ -11,4 +11,8 @@ export class CityQuiz {
     this.description = data.description;
     this.photoFileName = data.photoFileName;
   }
+
+  checkIsCorrectAnswer(answer: string): boolean {
+    return answer && this.cityName.toLowerCase() == answer.toLowerCase()
+  }
 }
