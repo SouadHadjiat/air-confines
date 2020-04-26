@@ -1,72 +1,87 @@
 <div class="main-container">
-  <h3>
-    <span *ngIf="!gameOver">Dans quelle ville a été prise cette photo ?</span>
-    <span *ngIf="gameOver">Jeu terminé !</span>
-  </h3>
 
-  <div class="game-level" *ngIf="currentLevel">
-    <div class="info-tooltip"
-         matTooltip="Le score à atteindre pour passer au niveau suivant est de {{currentLevelScoreGoal}}">
-      <mat-icon aria-hidden="false" aria-label="info">info</mat-icon>
-    </div>
+  <ng-container *ngIf="gameStatus === 'PLAYING'">
 
-    <div class="score-header">
-      <!-- level -->
-      <div *ngIf="!gameOver">
-        <span>Niveau {{currentLevel.level}}</span>
-      </div>
-      <!-- score -->
-      <div>
-        <span *ngIf="!gameOver">Score</span>
-        <span *ngIf="gameOver">Score final</span>
-        {{score}}
-      </div>
-      <!-- timer -->
-      <div>
-        <span>Chrono {{timerValueSeconds}}</span>
-      </div>
-    </div>
-
-    <div class="question" *ngIf="currentQuestion && !gameOver">
-      <img class="photo" src="./assets/photos/level_{{currentLevel.level}}/{{currentQuestion.photoFileName}}">
-
-      <div class="form-container">
-        <mat-form-field>
-          <input matInput placeholder="Réponse..." [(ngModel)]='answerModel' autofocus (keydown.enter)="onKeyEnter()">
-        </mat-form-field>
-        <!-- answer status -->
-        <div class="answer-status {{answerStatus}}">
-          <mat-icon *ngIf="answerStatus == 'CORRECT'" aria-hidden="false" aria-label="right">check_circle</mat-icon>
-          <mat-icon *ngIf="answerStatus == 'WRONG'" aria-hidden="false" aria-label="wrong">cancel</mat-icon>
+    <div class="game-level" *ngIf="currentLevel">
+      <div class="level-header">
+        <span>Niveau {{currentLevel.level}} - </span>
+        <div class="info-tooltip"
+             matTooltip="Le score à atteindre pour passer au niveau suivant est de {{currentLevelScoreGoal}}">
+          <mat-icon aria-hidden="false" aria-label="target">flag</mat-icon>
+          <span>{{currentLevelScoreGoal}}</span>
         </div>
-        <!-- submit buttons -->
-        <button [disabled]="answerStatus === 'CORRECT' || answerRevealed" mat-flat-button color="primary" class="submit-answer"
-                (click)="onSubmitAnswer()">
-          Valider
-        </button>
-
-        <button [disabled]="answerStatus === 'NA'" class="next-question"
-                mat-icon-button color="accent"
-                matTooltip="Question suivante"
-                (click)="onNextQuestion()" >
-          <mat-icon aria-hidden="false" aria-label="next">arrow_forward</mat-icon>
-        </button>
       </div>
 
-      <div *ngIf="answerStatus === 'WRONG'" class="hint">
-        <p>Vous ne trouvez pas la réponse? Vous pouvez réessayer ou réveler la réponse.</p>
-        <button mat-stroked-button *ngIf="!answerRevealed" (click)="onRevealAnswer()">Révéler</button>
-        <h3 *ngIf="answerRevealed">{{currentQuestion.cityName | titlecase}}</h3>
+      <div class="score-header">
+        <!-- score -->
+        <div>
+          <span>Score {{score}}</span>
+        </div>
+        <!-- timer -->
+        <div class="timer">
+            <mat-icon aria-hidden="false" aria-label="info">access_time</mat-icon>
+            {{timerValueSeconds}}
+        </div>
+      </div>
+
+      <div class="question" *ngIf="currentQuestion">
+        <img class="photo" src="./assets/photos/level_{{currentLevel.level}}/{{currentQuestion.photoFileName}}">
+
+        <div class="form-container">
+          <mat-form-field>
+            <input matInput placeholder="Indiquer la ville ..." [(ngModel)]='answerModel' autofocus (keydown.enter)="onKeyEnter()">
+          </mat-form-field>
+          <!-- answer status -->
+          <div class="answer-status {{answerStatus}}">
+            <mat-icon *ngIf="answerStatus == 'CORRECT'" aria-hidden="false" aria-label="right">check_circle</mat-icon>
+            <mat-icon *ngIf="answerStatus == 'WRONG'" aria-hidden="false" aria-label="wrong">cancel</mat-icon>
+          </div>
+          <!-- submit buttons -->
+          <button [disabled]="answerStatus === 'CORRECT' || answerRevealed" mat-flat-button color="primary" class="submit-answer"
+                  (click)="onSubmitAnswer()">
+            Valider
+          </button>
+
+          <button [disabled]="answerStatus === 'NA'" class="next-question"
+                  mat-icon-button color="accent"
+                  matTooltip="Question suivante"
+                  (click)="onNextQuestion()" >
+            <mat-icon aria-hidden="false" aria-label="next">arrow_forward</mat-icon>
+          </button>
+        </div>
+
+        <div *ngIf="answerStatus === 'WRONG'" class="hint">
+          <p>Vous ne trouvez pas la réponse? Vous pouvez réessayer ou réveler la réponse.</p>
+          <button mat-stroked-button *ngIf="!answerRevealed" (click)="onRevealAnswer()">Révéler</button>
+          <h3 *ngIf="answerRevealed">{{currentQuestion.cityName | titlecase}}</h3>
+        </div>
       </div>
     </div>
+  </ng-container>
 
-    <div *ngIf="gameOver" class="game-over-container">
-      <img class="photo" alt="Celebration (credits: Unsplash)" src="./assets/images/tada.jpg">
+  <ng-container *ngIf="gameStatus !== 'PLAYING'">
+    <div class="game-level">
+      <h3>Jeu terminé !</h3>
 
-      <div>
-        <button mat-flat-button color="accent" (click)="onRestartGame()">Rejouer</button>
+      <div class="score-header">
+        <!-- score -->
+        <div>
+          <span>Score Final {{score}}</span>
+        </div>
+        <!-- timer -->
+        <div class="timer">
+          <mat-icon aria-hidden="false" aria-label="info">access_time</mat-icon>
+          {{timerValueSeconds}}
+        </div>
+      </div>
+
+      <div class="game-over-container">
+        <img *ngIf="gameStatus === 'OVER_WON'" class="photo" alt="Celebration (credits: Unsplash)" src="./assets/images/tada.jpg">
+        <img *ngIf="gameStatus === 'OVER_LOST'" class="photo" alt="Lost (credits: Unsplash)" src="./assets/images/game-over.jpg">
+        <div>
+          <button mat-flat-button color="accent" (click)="onRestartGame()">Rejouer</button>
+        </div>
       </div>
     </div>
-
-  </div>
+  </ng-container>
 </div>

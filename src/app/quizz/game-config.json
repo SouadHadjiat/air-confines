@@ -56,6 +56,48 @@
           "countryName": "espagne",
           "description": "La sagrada familia",
           "photoFileName": "1-i.jpg"
+        },
+        {
+          "cityName": "lisbonne",
+          "countryName": "portugal",
+          "description": "",
+          "photoFileName": "1-j.jpg"
+        },
+        {
+          "cityName": "rome",
+          "countryName": "italie",
+          "description": "",
+          "photoFileName": "1-k.jpg"
+        },
+        {
+          "cityName": "venise",
+          "countryName": "italie",
+          "description": "",
+          "photoFileName": "1-l.jpg"
+        },
+        {
+          "cityName": "berlin",
+          "countryName": "allemagne",
+          "description": "",
+          "photoFileName": "1-m.jpg"
+        },
+        {
+          "cityName": "pise",
+          "countryName": "italie",
+          "description": "La tour de pise",
+          "photoFileName": "1-n.jpg"
+        },
+        {
+          "cityName": "barcelone",
+          "countryName": "espagne",
+          "description": "Architecture de Gaudi",
+          "photoFileName": "1-o.jpg"
+        },
+        {
+          "cityName": "seville",
+          "countryName": "espagne",
+          "description": "",
+          "photoFileName": "1-p.jpg"
         }
       ]
     }

@@ -11,18 +11,21 @@ import { GameService } from './game.service';
 export class QuizComponent {
 
   game: Game;
+  gameStatus: string = 'PLAYING'; // 'PLAYING', 'OVER_LOST', 'OVER_WON'
+  // level
   currentLevel: GameLevel;
   currentLevelScoreGoal = LEVEL_SCORE_TO_COMPLETE;
   currentLevelRightAnswersCount = 0;
   currentQuestion: CityQuiz;
   currentQuestionIndex: number = 0;
-  score: number = 0;
+  // config
   locale: string = 'fr'; // for now only french supported
 
   answerModel: string; // TODO set a real city search input
   answerStatus: string = 'NA'; //'NA', 'CORRECT', 'WRONG'
   answerRevealed: boolean = false;
-  gameOver: boolean = false;
+
+  score: number = 0;
 
   timer: any;
   timerValueSeconds: number = 0;
@@ -46,9 +49,8 @@ export class QuizComponent {
       this.currentQuestionIndex++;
       this.currentQuestion = this.currentLevel.questions[this.currentQuestionIndex];
     } else {
-      // restart level at 0 ?
-      this.currentQuestionIndex = 0;
-      this.currentQuestion = this.currentLevel.questions[this.currentQuestionIndex];
+      // game over
+      this.endGame(false);
     }
   }
 
@@ -58,7 +60,7 @@ export class QuizComponent {
       const nextLevel = this.game.levels[currentLevel];
       this.setCurrentLevel(nextLevel)
     } else {
-      this.endGame();
+      this.endGame(true);
     }
   }
 
@@ -95,7 +97,7 @@ export class QuizComponent {
   }
 
   private startGame() {
-    this.gameOver = false;
+    this.gameStatus = 'PLAYING';
     if (this.game.levels.length > 0) {
       // set first level
       const firstLevel = this.game.levels[0];
@@ -106,8 +108,8 @@ export class QuizComponent {
     this.resetAnswer();
   }
 
-  private endGame() {
-    this.gameOver = true;
+  private endGame(success: boolean = false) {
+    this.gameStatus = success ? 'OVER_WON' : 'OVER_LOST';
     this.stopTimer();
   }
 
@@ -136,7 +138,12 @@ export class QuizComponent {
 
   private startTimer() {
     this.timerValueSeconds = 0;
-    this.timer = setInterval(() => {this.timerValueSeconds++}, 1000)
+    this.timer = setInterval(() => {
+      this.timerValueSeconds++;
+      if (this.timerValueSeconds >= 3600) { // limit: 1h, just to stop the game
+        this.endGame(false);
+      }
+    }, 1000)
   }
 
   private stopTimer() {
