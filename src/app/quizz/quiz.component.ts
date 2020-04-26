@@ -21,6 +21,7 @@ export class QuizComponent {
 
   answerModel: string; // TODO set a real city search input
   answerStatus: string = 'NA'; //'NA', 'CORRECT', 'WRONG'
+  answerRevealed: boolean = false;
   gameOver: boolean = false;
 
   timer: any;
@@ -28,12 +29,7 @@ export class QuizComponent {
 
   constructor(public gameService: GameService) {
     this.game = this.gameService.loadGame();
-    if (this.game.levels.length > 0) {
-      // set first level
-      const firstLevel = this.game.levels[0];
-      this.setCurrentLevel(firstLevel)
-    }
-    this.startTimer();
+    this.startGame();
   }
 
   onNextQuestion() {
@@ -66,6 +62,10 @@ export class QuizComponent {
     }
   }
 
+  onRevealAnswer() {
+    this.answerRevealed = true;
+  }
+
   onSubmitAnswer() {
     if (!this.answerModel || this.answerStatus == 'CORRECT') {
       return;
@@ -90,6 +90,22 @@ export class QuizComponent {
     }
   }
 
+  onRestartGame() {
+    this.startGame();
+  }
+
+  private startGame() {
+    this.gameOver = false;
+    if (this.game.levels.length > 0) {
+      // set first level
+      const firstLevel = this.game.levels[0];
+      this.setCurrentLevel(firstLevel)
+    }
+    this.score = 0;
+    this.startTimer();
+    this.resetAnswer();
+  }
+
   private endGame() {
     this.gameOver = true;
     this.stopTimer();
@@ -98,6 +114,8 @@ export class QuizComponent {
   private setCurrentLevel(level: GameLevel) {
     this.currentLevel = level;
     this.currentLevel.shuffleQuestions();
+    this.currentLevel.completed = false;
+    this.currentLevelRightAnswersCount = 0;
     this.currentQuestionIndex = 0;
     this.currentQuestion = this.currentLevel.questions[0];
   }
@@ -113,9 +131,11 @@ export class QuizComponent {
   private resetAnswer() {
     this.answerStatus = 'NA';
     this.answerModel = '';
+    this.answerRevealed = false;
   }
 
   private startTimer() {
+    this.timerValueSeconds = 0;
     this.timer = setInterval(() => {this.timerValueSeconds++}, 1000)
   }
 

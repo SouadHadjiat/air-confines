@@ -10,17 +10,26 @@
       <mat-icon aria-hidden="false" aria-label="info">info</mat-icon>
     </div>
 
-    <h2>
-      <span *ngIf="!gameOver">
-        Niveau {{currentLevel.level}} - Score
-      </span>
-      <span *ngIf="gameOver">Score final</span>
-      {{score}}
-      <span> - Chrono {{timerValueSeconds}}</span>
-    </h2>
+    <div class="score-header">
+      <!-- level -->
+      <div *ngIf="!gameOver">
+        <span>Niveau {{currentLevel.level}}</span>
+      </div>
+      <!-- score -->
+      <div>
+        <span *ngIf="!gameOver">Score</span>
+        <span *ngIf="gameOver">Score final</span>
+        {{score}}
+      </div>
+      <!-- timer -->
+      <div>
+        <span>Chrono {{timerValueSeconds}}</span>
+      </div>
+    </div>
 
     <div class="question" *ngIf="currentQuestion && !gameOver">
       <img class="photo" src="./assets/photos/level_{{currentLevel.level}}/{{currentQuestion.photoFileName}}">
+
       <div class="form-container">
         <mat-form-field>
           <input matInput placeholder="Réponse..." [(ngModel)]='answerModel' autofocus (keydown.enter)="onKeyEnter()">
@@ -31,15 +40,23 @@
           <mat-icon *ngIf="answerStatus == 'WRONG'" aria-hidden="false" aria-label="wrong">cancel</mat-icon>
         </div>
         <!-- submit buttons -->
-        <button [disabled]="answerStatus === 'CORRECT'" mat-flat-button color="primary" class="submit-answer"
+        <button [disabled]="answerStatus === 'CORRECT' || answerRevealed" mat-flat-button color="primary" class="submit-answer"
                 (click)="onSubmitAnswer()">
           Valider
         </button>
 
-        <button [disabled]="answerStatus === 'NA'" mat-flat-button color="accent" class="submit-answer"
-                (click)="onNextQuestion()">
-          Suivant
+        <button [disabled]="answerStatus === 'NA'" class="next-question"
+                mat-icon-button color="accent"
+                matTooltip="Question suivante"
+                (click)="onNextQuestion()" >
+          <mat-icon aria-hidden="false" aria-label="next">arrow_forward</mat-icon>
         </button>
+      </div>
+
+      <div *ngIf="answerStatus === 'WRONG'" class="hint">
+        <p>Vous ne trouvez pas la réponse? Vous pouvez réessayer ou réveler la réponse.</p>
+        <button mat-stroked-button *ngIf="!answerRevealed" (click)="onRevealAnswer()">Révéler</button>
+        <h3 *ngIf="answerRevealed">{{currentQuestion.cityName | titlecase}}</h3>
       </div>
     </div>
 
@@ -47,7 +64,7 @@
       <img class="photo" alt="Celebration (credits: Unsplash)" src="./assets/images/tada.jpg">
 
       <div>
-        <button mat-flat-button color="accent">Rejouer</button>
+        <button mat-flat-button color="accent" (click)="onRestartGame()">Rejouer</button>
       </div>
     </div>
 

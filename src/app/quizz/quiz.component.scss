@@ -8,18 +8,50 @@
   height: 60vh;
 }
 
-.question {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.game-level {
+  margin: 0 auto;
+  min-width: 280px;
+  max-width: 500px;
+  width: 100%;
 
-  .form-container {
-    padding-top: 20px;
+  .score-header {
+    font-size: 1.4em;
+    font-weight: bold;
+    display: flex;
+    margin: 10px 0;
+    justify-content: space-evenly;;
   }
 
-  button.submit-answer {
-    margin-left: 15px;
+  .question {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .form-container {
+      padding-top: 12px;
+    }
+
+    .photo {
+      box-shadow: 5px 3px 5px 1px rgba(0, 0, 0, 0.1);
+    }
+
+    button.submit-answer {
+      margin-left: 8px;
+    }
+
+    button.next-question {
+      margin-left: 4px;
+    }
+  }
+
+  .hint {
+    p {
+      font-style: italic;
+    }
+    p, button {
+      color: #5d6a82;
+    }
   }
 }
 

@@ -13,6 +13,7 @@ export class CityQuiz {
   }
 
   checkIsCorrectAnswer(answer: string, locale: string): boolean {
-    return answer && this.cityName.localeCompare(answer, locale, {sensitivity: "base"}) == 0
+    return answer
+      && this.cityName.localeCompare(answer, locale, {sensitivity: "base", ignorePunctuation: true}) == 0
   }
 }
