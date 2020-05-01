@@ -2,7 +2,7 @@
 
   <ng-container *ngIf="gameStatus === 'PLAYING'">
 
-    <div class="game-level" *ngIf="currentLevel">
+    <div class="game-level" *ngIf="currentLevel && !currentLevel.completed">
       <div class="level-header">
         <span>Niveau {{currentLevel.level}} - </span>
         <div class="info-tooltip"
@@ -29,7 +29,9 @@
 
         <div class="form-container">
           <mat-form-field>
-            <input matInput placeholder="Indiquer la ville ..." [(ngModel)]='answerModel' autofocus (keydown.enter)="onKeyEnter()">
+            <input matInput autofocus autocomplete="off" placeholder="Indiquer la ville ..."
+                   [(ngModel)]='answerModel'
+                   (keydown.enter)="onKeyEnter()">
           </mat-form-field>
           <!-- answer status -->
           <div class="answer-status {{answerStatus}}">
@@ -51,14 +53,41 @@
         </div>
 
         <div *ngIf="answerStatus === 'WRONG'" class="hint">
-          <p>Vous ne trouvez pas la réponse? Vous pouvez réessayer ou réveler la réponse.</p>
+          <p *ngIf="!answerRevealed">Vous ne trouvez pas la réponse? Vous pouvez réessayer ou réveler la réponse.</p>
           <button mat-stroked-button *ngIf="!answerRevealed" (click)="onRevealAnswer()">Révéler</button>
           <h3 *ngIf="answerRevealed">{{currentQuestion.cityName | titlecase}}</h3>
         </div>
+
+        <div *ngIf="answerStatus === 'CORRECT' || answerRevealed" class="hint description">
+          <p>{{currentQuestion.description}}</p>
+        </div>
       </div>
+    </div>
+
+    <div class="game-level level-completed" *ngIf="currentLevel && currentLevel.completed">
+        <h3>Niveau {{currentLevel.level}} réussi 🎉</h3>
+
+        <div class="score-header">
+          <!-- score -->
+          <div>
+            <span>Score {{score}}</span>
+          </div>
+          <!-- timer -->
+          <div class="timer">
+            <mat-icon aria-hidden="false" aria-label="info">access_time</mat-icon>
+            {{timerValueSeconds}}
+          </div>
+        </div>
+
+        <div>
+          <img class="photo" src="./assets/photos/level_1/success.jpg">
+          <h4>Prêt à passer au niveau 2 ?</h4>
+          <button mat-flat-button color="accent" (click)="onNextLevel()">Jouer</button>
+        </div>
     </div>
   </ng-container>
 
+  <!-- game finished -->
   <ng-container *ngIf="gameStatus !== 'PLAYING'">
     <div class="game-level">
       <h3>Jeu terminé !</h3>

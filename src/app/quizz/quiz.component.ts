@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CityQuiz } from './city-quiz.model';
-import { Game, GameLevel, LEVEL_SCORE_TO_COMPLETE } from './game.model';
+import { Game, GameLevel, LEVEL_SCORE_TO_COMPLETE, LEVEL_TIMER_BONUS_GOAL } from './game.model';
 import { GameService } from './game.service';
 
 @Component({
@@ -15,6 +15,8 @@ export class QuizComponent {
   // level
   currentLevel: GameLevel;
   currentLevelScoreGoal = LEVEL_SCORE_TO_COMPLETE;
+  currentLevelTimerBonusGoal = LEVEL_TIMER_BONUS_GOAL;
+  currentLevelTimerValue: number = 0;
   currentLevelRightAnswersCount = 0;
   currentQuestion: CityQuiz;
   currentQuestionIndex: number = 0;
@@ -41,9 +43,9 @@ export class QuizComponent {
       return;
     }
     this.resetAnswer();
-    if (this.currentLevel.completed) {
-      // current level is already completed, next level
-      this.onNextLevel();
+    if (this.currentLevelRightAnswersCount == this.currentLevelScoreGoal) {
+      // current level is completed
+      this.setCurrentLevelCompleted();
     } else if (this.currentQuestionIndex < this.currentLevel.questions.length - 1) {
       // next question
       this.currentQuestionIndex++;
@@ -55,10 +57,14 @@ export class QuizComponent {
   }
 
   onNextLevel() {
-    const currentLevel = this.currentLevel.level;
-    if (currentLevel < this.game.levels.length - 1) {
-      const nextLevel = this.game.levels[currentLevel];
-      this.setCurrentLevel(nextLevel)
+    if (!this.currentLevel.completed) {
+      return;
+    }
+    const currentLevelIndex = this.currentLevel.level - 1;
+    if (currentLevelIndex < this.game.levels.length - 1) {
+      const nextLevel = this.game.levels[currentLevelIndex + 1];
+      this.setCurrentLevel(nextLevel);
+      this.resumeTimer();
     } else {
       this.endGame(true);
     }
@@ -78,9 +84,6 @@ export class QuizComponent {
       this.setCorrectAnswerStatus();
     } else {
       this.setWrongAnswerStatus()
-    }
-    if (this.currentLevelRightAnswersCount == this.currentLevelScoreGoal) {
-      this.currentLevel.completed = true
     }
   }
 
@@ -118,8 +121,36 @@ export class QuizComponent {
     this.currentLevel.shuffleQuestions();
     this.currentLevel.completed = false;
     this.currentLevelRightAnswersCount = 0;
+    this.currentLevelTimerValue = 0;
     this.currentQuestionIndex = 0;
     this.currentQuestion = this.currentLevel.questions[0];
+  }
+
+  private setCurrentLevelCompleted() {
+    this.currentLevel.completed = true;
+    this.setCurrentLevelBonusScore();
+    if (this.hasNextLevel()) {
+      this.stopTimer(); // stop timer before moving to next level
+    } else {
+      this.endGame(true); // no next level, game is finished
+    }
+  }
+
+  private setCurrentLevelBonusScore() {
+    if (this.currentLevel.completed) {
+      if (this.currentLevelTimerValue <= this.currentLevelTimerBonusGoal) {
+        // time bonus point
+        this.score++;
+      }
+      if ((this.currentQuestionIndex + 1) == this.currentLevelScoreGoal) {
+        // all questions have been successfully replied
+        this.score++;
+      }
+    }
+  }
+
+  private hasNextLevel() {
+    return this.currentLevel && this.currentLevel.level < this.game.levels.length;
   }
 
   private setCorrectAnswerStatus() {
@@ -138,8 +169,13 @@ export class QuizComponent {
 
   private startTimer() {
     this.timerValueSeconds = 0;
+    this.resumeTimer();
+  }
+
+  private resumeTimer() {
     this.timer = setInterval(() => {
       this.timerValueSeconds++;
+      this.currentLevelTimerValue++;
       if (this.timerValueSeconds >= 3600) { // limit: 1h, just to stop the game
         this.endGame(false);
       }

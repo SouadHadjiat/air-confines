@@ -1,7 +1,7 @@
 import { CityQuiz } from './city-quiz.model';
 
-export const MAX_LEVEL: number = 10;
 export const LEVEL_SCORE_TO_COMPLETE: number = 8;
+export const LEVEL_TIMER_BONUS_GOAL: number = 25;
 
 export class Game {
   levels: GameLevel[] = [];
