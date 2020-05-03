@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CityQuiz } from './city-quiz.model';
-import { Game, GameLevel, LEVEL_SCORE_TO_COMPLETE, LEVEL_TIMER_BONUS_GOAL } from './game.model';
+import { Game, GameLevel, GameResult, LEVEL_SCORE_TO_COMPLETE, LEVEL_TIMER_BONUS_GOAL } from './game.model';
 import { GameService } from './game.service';
 
 @Component({
@@ -12,6 +12,8 @@ export class QuizComponent {
 
   game: Game;
   gameStatus: string = 'PLAYING'; // 'PLAYING', 'OVER_LOST', 'OVER_WON'
+  gameBestResult: GameResult;
+  gameHasNewBestResult: boolean = false;
   // level
   currentLevel: GameLevel;
   currentLevelScoreGoal = LEVEL_SCORE_TO_COMPLETE;
@@ -34,6 +36,7 @@ export class QuizComponent {
 
   constructor(public gameService: GameService) {
     this.game = this.gameService.loadGame();
+    this.gameBestResult = this.gameService.loadGameBestResult();
     this.startGame();
   }
 
@@ -99,6 +102,8 @@ export class QuizComponent {
     this.startGame();
   }
 
+  /******** game *********/
+
   private startGame() {
     this.gameStatus = 'PLAYING';
     if (this.game.levels.length > 0) {
@@ -107,14 +112,39 @@ export class QuizComponent {
       this.setCurrentLevel(firstLevel)
     }
     this.score = 0;
+    this.gameHasNewBestResult = false;
     this.startTimer();
     this.resetAnswer();
   }
 
   private endGame(success: boolean = false) {
-    this.gameStatus = success ? 'OVER_WON' : 'OVER_LOST';
     this.stopTimer();
+    this.gameStatus = success ? 'OVER_WON' : 'OVER_LOST';
+    // save best game result
+    this.saveBestGameResult();
   }
+
+  private saveBestGameResult() {
+    // save best game result
+    if (this.hasNewBestResult()) {
+      this.gameBestResult = this.gameService.saveGameBestResult(
+        new GameResult({
+          level: this.currentLevel.level,
+          score: this.score,
+          time: this.timerValueSeconds
+        })
+      );
+      this.gameHasNewBestResult = true;
+    }
+    this.gameBestResult = this.gameService.saveGameBestResult(this.gameBestResult);
+  }
+
+  private hasNewBestResult() {
+    return (this.score > this.gameBestResult.score // better score or better time for same score
+      || (this.score == this.gameBestResult.score && this.timerValueSeconds < this.gameBestResult.time));
+  }
+
+  /******** current level *********/
 
   private setCurrentLevel(level: GameLevel) {
     this.currentLevel = level;
@@ -153,6 +183,8 @@ export class QuizComponent {
     return this.currentLevel && this.currentLevel.level < this.game.levels.length;
   }
 
+  /******** answer *********/
+
   private setCorrectAnswerStatus() {
     this.answerStatus = 'CORRECT'
   }
@@ -166,6 +198,8 @@ export class QuizComponent {
     this.answerModel = '';
     this.answerRevealed = false;
   }
+
+  /******** timer *********/
 
   private startTimer() {
     this.timerValueSeconds = 0;

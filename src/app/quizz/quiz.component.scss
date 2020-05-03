@@ -38,6 +38,14 @@
         margin-right: 4px;
       }
     }
+    .score {
+      display: flex;
+      align-items: center;
+      .star-icon {
+        color: #ffd600;
+        margin-right: 4px;
+      }
+    }
   }
 
   .question {
@@ -95,7 +103,14 @@
 .game-over-container {
   display: flex;
   flex-direction: column;
+  .replay-button {
+    margin-top: 8px;
+  }
   .photo {
-    margin-bottom: 16px;
+    margin-bottom: 8px;
+  }
+  .score-header {
+    padding-top: 0;
+    padding-bottom: 0;
   }
 }

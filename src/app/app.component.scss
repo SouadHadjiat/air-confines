@@ -1,0 +1,21 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .title {
+    font-family: 'Open Sans', serif;
+    text-transform: uppercase;
+    margin: 8px 0;
+    letter-spacing: 1px;
+  }
+  mat-icon {
+    &.plane {
+      margin-left: 4px;
+      transform: rotate(40deg);
+      color: #ed0000;
+    }
+    &.home {
+      color: #7e9abf;
+    }
+  }
+}

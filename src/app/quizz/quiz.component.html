@@ -80,8 +80,8 @@
         </div>
 
         <div>
-          <img class="photo" src="./assets/photos/level_1/success.jpg">
-          <h4>Prêt à passer au niveau 2 ?</h4>
+          <img class="photo" src="./assets/photos/level_{{currentLevel.level}}/success.jpg">
+          <h4>Prêts à passer au niveau {{currentLevel.level + 1}} ?</h4>
           <button mat-flat-button color="accent" (click)="onNextLevel()">Jouer</button>
         </div>
     </div>
@@ -94,7 +94,8 @@
 
       <div class="score-header">
         <!-- score -->
-        <div>
+        <div class="score">
+          <mat-icon class="star-icon" *ngIf="gameHasNewBestResult">star</mat-icon>
           <span>Score Final {{score}}</span>
         </div>
         <!-- timer -->
@@ -107,7 +108,21 @@
       <div class="game-over-container">
         <img *ngIf="gameStatus === 'OVER_WON'" class="photo" alt="Celebration (credits: Unsplash)" src="./assets/images/tada.jpg">
         <img *ngIf="gameStatus === 'OVER_LOST'" class="photo" alt="Lost (credits: Unsplash)" src="./assets/images/game-over.jpg">
-        <div>
+
+        <div class="score-header best-score" *ngIf="!gameHasNewBestResult && gameBestResult && gameBestResult.score > 0">
+          <!-- best score -->
+          <div class="score">
+            <mat-icon class="star-icon">star</mat-icon>
+            <span>Votre meilleur score {{gameBestResult.score}}</span>
+          </div>
+          <!-- timer -->
+          <div class="timer">
+            <mat-icon aria-hidden="false" aria-label="info">access_time</mat-icon>
+            {{gameBestResult.time}}
+          </div>
+        </div>
+
+        <div class="replay-button">
           <button mat-flat-button color="accent" (click)="onRestartGame()">Rejouer</button>
         </div>
       </div>

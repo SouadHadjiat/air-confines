@@ -6,7 +6,7 @@ export const LEVEL_TIMER_BONUS_GOAL: number = 25;
 export class Game {
   levels: GameLevel[] = [];
 
-  constructor(data: any) {
+  constructor(data: any = {}) {
     this.levels = data.levels.map(level => new GameLevel(level));
   }
 }
@@ -16,7 +16,7 @@ export class GameLevel {
   questions: CityQuiz[] = [];
   completed: boolean = false; //
 
-  constructor(data: any) {
+  constructor(data: any = {}) {
     this.level = data.level;
     this.questions = data.questions.map(question => new CityQuiz(question));
   }
@@ -31,4 +31,16 @@ export class GameLevel {
       }
   }
 
+}
+
+export class GameResult {
+  level: number = 0;
+  score: number = 0;
+  time: number = 0;
+
+  constructor(data: any = {}) {
+    this.level = data.level || 0;
+    this.score = data.score || 0;
+    this.time = data.time || 0;
+  }
 }
