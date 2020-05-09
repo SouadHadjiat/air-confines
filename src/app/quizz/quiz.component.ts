@@ -78,7 +78,7 @@ export class QuizComponent {
   }
 
   onSubmitAnswer() {
-    if (!this.answerModel || this.answerStatus == 'CORRECT') {
+    if (!this.answerModel || this.answerStatus == 'CORRECT' || this.answerRevealed) {
       return;
     }
     if (this.currentQuestion.checkIsCorrectAnswer(this.answerModel, this.locale)) {
