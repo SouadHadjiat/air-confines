@@ -1,6 +1,6 @@
 .photo {
-  min-height: 300px;
-  height: 60vh;
+  min-height: 250px;
+  height: 50vh;
 }
 
 .game-level {
@@ -25,7 +25,7 @@
   }
 
   .score-header {
-    font-size: 1.4em;
+    font-size: 1.3em;
     font-weight: bold;
     display: flex;
     padding: 6px 12px;
@@ -45,6 +45,12 @@
         color: #ffd600;
         margin-right: 4px;
       }
+    }
+    .share {
+      margin-left: 8px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
     }
   }
 

@@ -99,9 +99,31 @@
           <span>Score Final {{score}}</span>
         </div>
         <!-- timer -->
-        <div class="timer">
-          <mat-icon aria-hidden="false" aria-label="info">access_time</mat-icon>
-          {{timerValueSeconds}}
+        <div class="display-flex">
+          <div class="timer">
+            <mat-icon aria-hidden="false" aria-label="time">access_time</mat-icon>
+            {{timerValueSeconds}}
+          </div>
+          <!-- web API share (mobile + safari) -->
+          <div class="share" *ngIf="windowNavigator.share" (click)="onShareScore()">
+            <mat-icon aria-hidden="false" aria-label="share">share</mat-icon>
+          </div>
+          <!-- fallback share menu (desktop) -->
+          <button mat-icon-button  aria-label="share menu" [matMenuTriggerFor]="shareMenu" *ngIf="!windowNavigator.share">
+            <mat-icon>share</mat-icon>
+          </button>
+          <mat-menu #shareMenu="matMenu" class="share-menu">
+            <a href="http://twitter.com/share?text={{this.shareData.text}}&url={{this.shareData.url}}" target="_blank" style="text-decoration: none">
+              <button mat-menu-item>
+                <img width="24" src="./assets/images/twitter-logo.png" style="margin-right: 16px;vertical-align: middle;">
+                <span>Partager sur Twitter</span>
+              </button>
+            </a>
+            <button mat-menu-item (click)="onCopyShareText()">
+              <mat-icon>file_copy</mat-icon>
+              <span>Copier dans le presse-papier</span>
+            </button>
+          </mat-menu>
         </div>
       </div>
 
@@ -113,7 +135,7 @@
           <!-- best score -->
           <div class="score">
             <mat-icon class="star-icon">star</mat-icon>
-            <span>Votre meilleur score {{gameBestResult.score}}</span>
+            <span>Meilleur score {{gameBestResult.score}}</span>
           </div>
           <!-- timer -->
           <div class="timer">

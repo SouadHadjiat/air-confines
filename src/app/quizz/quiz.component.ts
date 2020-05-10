@@ -34,6 +34,10 @@ export class QuizComponent {
   timer: any;
   timerValueSeconds: number = 0;
 
+  // share
+  windowNavigator: any = window.navigator;
+  shareData: {title: string, text: string, url: string};
+
   constructor(public gameService: GameService) {
     this.game = this.gameService.loadGame();
     this.gameBestResult = this.gameService.loadGameBestResult();
@@ -102,6 +106,30 @@ export class QuizComponent {
     this.startGame();
   }
 
+  onShareScore() {
+    if (this.windowNavigator.share) {
+      this.windowNavigator.share({
+        title: this.shareData.title,
+        text: this.shareData.text,
+        url: this.shareData.url
+      }).then(() => {
+        console.log('Thanks for sharing!');
+      }).catch(console.error);
+    } else {
+      console.log('web api share not supported');
+    }
+  }
+
+  onCopyShareText() {
+    const copyInput = document.createElement("textarea");
+    copyInput.value = this.shareData.text + " " + this.shareData.url;
+    document.body.appendChild(copyInput);
+    copyInput.focus();
+    copyInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(copyInput);
+  }
+
   /******** game *********/
 
   private startGame() {
@@ -120,6 +148,7 @@ export class QuizComponent {
   private endGame(success: boolean = false) {
     this.stopTimer();
     this.gameStatus = success ? 'OVER_WON' : 'OVER_LOST';
+    this.buildShareData();
     // save best game result
     this.saveBestGameResult();
   }
@@ -142,6 +171,16 @@ export class QuizComponent {
   private hasNewBestResult() {
     return (this.score > this.gameBestResult.score // better score or better time for same score
       || (this.score == this.gameBestResult.score && this.timerValueSeconds < this.gameBestResult.time));
+  }
+
+  private buildShareData() {
+    const shareText = "Mon score sur Air Confinés est de " + this.score + " points en " + this.timerValueSeconds + "s";
+    const shareUrl = "https://airconfines.fr";
+    this.shareData = {
+      title: "Air Confinés",
+      text: shareText,
+      url: shareUrl
+    }
   }
 
   /******** current level *********/
