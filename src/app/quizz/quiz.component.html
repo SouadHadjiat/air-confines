@@ -64,7 +64,7 @@
       </div>
     </div>
 
-    <div class="game-level level-completed" *ngIf="currentLevel && currentLevel.completed">
+    <div class="game-level" *ngIf="currentLevel && currentLevel.completed">
         <h3>Niveau {{currentLevel.level}} réussi 🎉</h3>
 
         <div class="score-header">
@@ -79,7 +79,7 @@
           </div>
         </div>
 
-        <div>
+        <div class="level-completed">
           <img class="photo" src="./assets/photos/level_{{currentLevel.level}}/success.jpg">
           <h4>Prêts à passer au niveau {{currentLevel.level + 1}} ?</h4>
           <button mat-flat-button color="accent" (click)="onNextLevel()">Jouer</button>

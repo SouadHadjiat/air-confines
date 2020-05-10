@@ -22,13 +22,26 @@ export class GameLevel {
   }
 
   shuffleQuestions() {
-      let j, x, i;
-      for (i = this.questions.length - 1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i + 1));
-        x = this.questions[i];
-        this.questions[i] = this.questions[j];
-        this.questions[j] = x;
+    // shuffle all questions
+    let suffledQuestions: CityQuiz[] = [].concat(this.questions);
+    let j, x, i;
+    for (i = suffledQuestions.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      x = suffledQuestions[i];
+      suffledQuestions[i] = suffledQuestions[j];
+      suffledQuestions[j] = x;
+    }
+    // deduplicate questions so you don't see the same city too soon
+    let questionsUnique: CityQuiz[] = [];
+    let questionsDuplicates: CityQuiz[] = [];
+    for (let question of suffledQuestions) {
+      if (questionsUnique.find(q => q.cityName == question.cityName)) {
+        questionsDuplicates.push(question);
+      } else {
+        questionsUnique.push(question);
       }
+    }
+    this.questions = questionsUnique.concat(questionsDuplicates);
   }
 
 }

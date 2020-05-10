@@ -4,104 +4,104 @@
       "level": 1,
       "questions": [
         {
-          "cityName": "paris",
-          "countryName": "france",
-          "description": "La tour eiffel, vue depuis le 16ème arrondissement de Paris, France.",
+          "cityName": "Paris",
+          "countryName": "France",
+          "description": "La tour eiffel, haute de 324 mètres, innaugurée en 1889 à l'occasion de l'exposition universelle de Paris, est un des monuments les plus visités au monde.",
           "photoFileName": "1-a.jpg"
         },
         {
-          "cityName": "madrid",
-          "countryName": "espagne",
+          "cityName": "Madrid",
+          "countryName": "Espagne",
           "description": "Plaza mayor de Madrid, Espagne.",
           "photoFileName": "1-b.jpg"
         },
         {
-          "cityName": "geneve",
-          "countryName": "suisse",
+          "cityName": "Genève",
+          "countryName": "Suisse",
           "description": "Le jet d'Eau, haut de 140 mètres, est l'emblème de la ville de Genève, en Suisse",
           "photoFileName": "1-c.jpg"
         },
         {
-          "cityName": "amsterdam",
-          "countryName": "hollande",
+          "cityName": "Amsterdam",
+          "countryName": "Hollande",
           "description": "Les lettres géantes 'I Amsterdam' situées dans le quartier des musées, Hollande.",
           "photoFileName": "1-d.jpg"
         },
         {
-          "cityName": "rome",
-          "countryName": "italie",
+          "cityName": "Rome",
+          "countryName": "Italie",
           "description": "Le colisée de Rome, Italie.",
           "photoFileName": "1-e.jpg"
         },
         {
-          "cityName": "pise",
-          "countryName": "italie",
+          "cityName": "Pise",
+          "countryName": "Italie",
           "description": "La tour de pise est le campanile de la cathédrale Notre-Dame de l’Assomption de Pise, en Toscane, Italie.",
           "photoFileName": "1-f.jpg"
         },
         {
-          "cityName": "venise",
-          "countryName": "italie",
+          "cityName": "Venise",
+          "countryName": "Italie",
           "description": "Le Grand Canal de Venise, avec le pont du Rialto en arrière plan, Italie.",
           "photoFileName": "1-g.jpg"
         },
         {
-          "cityName": "paris",
-          "countryName": "france",
+          "cityName": "Paris",
+          "countryName": "France",
           "description": "Le musée du louvre, Paris, France.",
           "photoFileName": "1-h.jpg"
         },
         {
-          "cityName": "barcelone",
-          "countryName": "espagne",
+          "cityName": "Barcelone",
+          "countryName": "Espagne",
           "description": "La sagrada familia, façade de la nativité réalisée par Antoni Gaudí, Barcelone, Espagne.",
           "photoFileName": "1-i.jpg"
         },
         {
-          "cityName": "lisbonne",
+          "cityName": "Lisbonne",
           "countryName": "portugal",
           "description": "Rue typique de Lisbonne avec le fameux trameway en service depuis 1873, Portugal.",
           "photoFileName": "1-j.jpg"
         },
         {
-          "cityName": "rome",
-          "countryName": "italie",
+          "cityName": "Rome",
+          "countryName": "Italie",
           "description": "Le Forum Romain, situé dans le site archéologique le plus important de Rome, Italie.",
           "photoFileName": "1-k.jpg"
         },
         {
-          "cityName": "venise",
-          "countryName": "italie",
+          "cityName": "Venise",
+          "countryName": "Italie",
           "description": "Vue aérienne de la place Saint-Marc, la plus célèbre place de Venise, Italie.",
           "photoFileName": "1-l.jpg"
         },
         {
-          "cityName": "paris",
-          "countryName": "france",
+          "cityName": "Paris",
+          "countryName": "France",
           "description": "Vue sur la conciergerie et le Pont au Change reliant l'île de la cité, Paris, France.",
           "photoFileName": "1-m.jpg"
         },
         {
-          "cityName": "pise",
-          "countryName": "italie",
+          "cityName": "Pise",
+          "countryName": "Italie",
           "description": "La tour de pise et la cathédrale Notre-Dame de l’Assomption de Pise, en Toscane, Italie.",
           "photoFileName": "1-n.jpg"
         },
         {
-          "cityName": "barcelone",
-          "countryName": "espagne",
+          "cityName": "Barcelone",
+          "countryName": "Espagne",
           "description": "Bâtiment typique de l'architecture de Gaudi, Barcelone, Espagne.",
           "photoFileName": "1-o.jpg"
         },
         {
-          "cityName": "lisbonne",
-          "countryName": "portugal",
+          "cityName": "Lisbonne",
+          "countryName": "Portugal",
           "description": "Vue sur les toits de Lisbonne, Portugal.",
           "photoFileName": "1-p.jpg"
         },
         {
-          "cityName": "amsterdam",
-          "countryName": "hollande",
+          "cityName": "Amsterdam",
+          "countryName": "Hollande",
           "description": "Centre ville d'amsterdam, reconnaissable par ses ponts et vélos, Hollande.",
           "photoFileName": "1-q.jpg"
         }
@@ -199,6 +199,101 @@
           "countryName": "République Tchèque",
           "description": "Pont Charles de Prague, République Tchèque.",
           "photoFileName": "2-o.jpg"
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "questions": [
+        {
+          "cityName": "Iguazú",
+          "countryName": "Argentine",
+          "description": "Les chutes d'Iguazú, situées au milieu de la forêt tropicale, à la frontière entre l'Argentine (80 %) et le Brésil (20 %), sont une merveille naturelle inscrite au patrimoine mondial par l'UNESCO en 1984.",
+          "photoFileName": "3-a.jpg"
+        },
+        {
+          "cityName": "Montreal",
+          "countryName": "Canada",
+          "description": "Les foufounes électriques, club punk / metal célèbre de Montreal, province de Québec, Canada",
+          "photoFileName": "3-b.jpg"
+        },
+        {
+          "cityName": "Hanoï",
+          "countryName": "Vietnam",
+          "description": "Le temple de la litterature à Hanoï, le plus important des mausolées de Confucius du Vietnam.",
+          "photoFileName": "3-c.jpg"
+        },
+        {
+          "cityName": "Québec",
+          "countryName": "Canada",
+          "description": "Vue sur le château de Frontenac, célèbre hôtel de Québec situé dans le Vieux-Québec surplombant le fleuve Saint-Laurent. Province de Québec, Canada",
+          "photoFileName": "3-d.jpg"
+        },
+        {
+          "cityName": "Rio de Janeiro",
+          "countryName": "Brésil",
+          "description": "L'escalier Selarón, connu en portugais sous les noms d'Escadaria Selarón ou d'Escadaria do Convento de Santa Teresa, est une voie publique en escalier à Rio de Janeiro, au Brésil.",
+          "photoFileName": "3-e.jpg"
+        },
+        {
+          "cityName": "Alger",
+          "countryName": "Algérie",
+          "description": "La Grande Poste d'Alger est un édifice de style néo-mauresque, construit à Alger en 1910 par les architectes Jules Voinot et Marius Toudoire, qui abrite les services de la poste algérienne au cœur de la ville d'Alger en Algérie.",
+          "photoFileName": "3-f.jpg"
+        },
+        {
+          "cityName": "Bologne",
+          "countryName": "Italie",
+          "description": "Vue sur la ville de Bologne, ville du nord est de l'Italie, chef-lieu de la région d'Émilie-Romagne, reconnaissable par ses tours médiévales et ses 40km d'arcades.",
+          "photoFileName": "3-g.jpg"
+        },
+        {
+          "cityName": "Cologne",
+          "countryName": "Allemagne",
+          "description": "Cologne et sa célèbre cathédrale, ville âgée de 2 000 ans qui se trouve en Allemagne de l'Ouest.",
+          "photoFileName": "3-h.jpg"
+        },
+        {
+          "cityName": "Montréal",
+          "countryName": "Canada",
+          "description": "Vue sur la ville de Montréal depuis le parc du Mont-Royal, avec le stade olympique construit pour les J0 d'été de 1976, province de Québec, Canada",
+          "photoFileName": "3-i.jpg"
+        },
+        {
+          "cityName": "Milan",
+          "countryName": "Italie",
+          "description": "La cathédrale de la Nativité-de-la-Sainte-Vierge de Milan est située sur la piazza del Duomo, à Milan, en Italie.",
+          "photoFileName": "3-j.jpg"
+        },
+        {
+          "cityName": "Alger",
+          "countryName": "Algérie",
+          "description": "Le mémorial du Martyr, sanctuaire du Martyr ou Maqam E’chahid est un monument aux morts surplombant la ville d'Alger, érigé en 1982 à l'occasion du 20ᵉ anniversaire de l'indépendance de l'Algérie",
+          "photoFileName": "3-k.jpg"
+        },
+        {
+          "cityName": "Saigon",
+          "countryName": "Vietnam",
+          "description": "L'hôtel de ville de Hô-Chi-Minh-Ville, la plus grande ville économique du vietnam, plus couramment appelée Saïgon.",
+          "photoFileName": "3-l.jpg"
+        },
+        {
+          "cityName": "Buenos Aires",
+          "countryName": "Argentine",
+          "description": "Petite rue typique de la ville de Buenos Aires, avec ses maisons colorées et son street art. Argentine",
+          "photoFileName": "3-m.jpg"
+        },
+        {
+          "cityName": "Nantes",
+          "countryName": "France",
+          "description": "Le Grand Éléphant, la plus célèbre création des Machines de l’île à Nantes, France.",
+          "photoFileName": "3-n.jpg"
+        },
+        {
+          "cityName": "Sintra",
+          "countryName": "Portugal",
+          "description": "Le palais de Pena est un édifice historique portugais situé sur l’une des cimes des monts de Sintra, au cœur d’un parc de 200 hectares de la ville de Sintra, Portugal.",
+          "photoFileName": "3-o.jpg"
         }
       ]
     }

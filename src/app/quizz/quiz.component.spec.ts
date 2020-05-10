@@ -12,7 +12,7 @@ describe('QuizComponent', () => {
 
     it('should load game with all levels', () => {
       expect(quizComponent.game).toBeDefined();
-      expect(quizComponent.game.levels.length).toEqual(2);
+      expect(quizComponent.game.levels.length).toEqual(3);
     });
 
     it('should start game', () => {
